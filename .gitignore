@@ -1,0 +1,10 @@
+# Quartus generated files
+db/
+incremental_db/
+simulation/modelsim/
+*.qws
+*.bak
+
+# OS files
+.DS_Store
+Thumbs.db
