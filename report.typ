@@ -43,8 +43,10 @@
 N/A
 
 == Problems Encountered
+It was difficult to iron out some bugs in the logic, due to the complexity of some of the designs. Also, I initially struggled to figure out that I had to set the number of output bits of a constant, otherwise it would just truncate the entered value.
 
 == Applications
+This lab demonstrates the use of multiplexers as logical elements, used for selecting one signal from a group of signals. Multiplexers are ubiquitous throughout hardware design, as they are extremely useful for the routing of data. More generally, the system of hierarchical component design is extremely useful, as it not only provides a more practical way to use simulators and circuit designers, but it also connects to how circuits are actually built in real-life: At a high level, you connect together complex components, which are each built from sub-components, which also combine some level of abstraction from bare logic gates.
 
 #pagebreak()
 
