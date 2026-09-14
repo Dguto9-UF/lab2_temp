@@ -75,6 +75,37 @@ N/A
   let table_cells = (empty,head(nt(x_lab)),head(x_lab),head(nt(y_lab)),content(x0y0),content(x1y0),head(y_lab),content(x0y1),content(x1y1)) 
   table(columns: 3, ..table_cells)
 }
+#let kmap_4x4(x1_lab, x2_lab, y1_lab, y2_lab, groups,
+              x0y0, x1y0, x2y0, x3y0,
+              x0y1, x1y1, x2y1, x3y1,
+              x0y2, x1y2, x2y2, x3y2,
+              x0y3, x1y3, x2y3, x3y3,
+              ) = {
+  let group_color(x, y) = {
+    for group in groups {
+      let coords = group.at(0)
+      let color = group.at(1)
+      for coord in coords {
+        if coord.at(0) == x and coord.at(1) == y {
+          return color
+        }
+      }
+    }
+    return black
+  }
+  let empty = table.cell(stroke:none)[]
+  let head(n) = table.cell(stroke:none)[#n]
+  let content(n, x, y) = table.cell(align: center, fill: group_color(x, y))[#text(fill: white, font: "JetBrainsMono NF")[#n]]
+  let nt(n) = overline()[#n #h(0.1em)]
+  let table_cells = (
+    empty,head(nt(x1_lab) + nt(x2_lab)),head(nt(x1_lab) + x2_lab),head(x1_lab + x2_lab),head(x1_lab + nt(x2_lab)),
+    head(nt(y1_lab) + nt(y2_lab)),content(x0y0, 0, 0),content(x1y0, 1, 0),content(x2y0, 2, 0),content(x3y0, 3, 0),
+    head(nt(y1_lab) + y2_lab),content(x0y1, 0, 1),content(x1y1, 1, 1),content(x2y1, 2, 1),content(x3y1, 3, 1),
+    head(y1_lab + y2_lab),content(x0y2, 0, 2),content(x1y2, 1, 2),content(x2y2, 2, 2),content(x3y2, 3, 2),
+    head(y1_lab + nt(y2_lab)),content(x0y3, 0, 3),content(x1y3, 1, 3),content(x2y3, 2, 3),content(x3y3, 3, 3),
+  ) 
+  table(columns: 5, ..table_cells)
+}
 
 == Pre-Lab Questions
 
@@ -170,6 +201,29 @@ N/A
     1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 
     1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0,
     1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0,
-  
   )
+  #colbreak()
+  #kmap_4x4(
+    "B0", "B1", "B2", "B3",
+    (
+      (
+        ((0,3),), green
+      ),
+      (
+        ((1,1),), orange
+      ),
+      (
+        ((3,0),), olive
+      ),
+      (
+        ((2,2),(2,3)), teal
+      ),
+    ),
+    0, 0, 0, 1,
+    0, 1, 0, 0,
+    0, 0, 1, 0,
+    1, 0, 1, 0
+  )
+  #let rc(n, color) = rect(stroke: 2pt + color, radius: 5pt)[#n]
+  $rc(nt(B_0) nt(B_1) B_2 nt(B_3), #green) + rc(nt(B_0) B_1 nt(B_2) B_3, #orange) + rc(B_0 nt(B_1) nt(B_2) nt(B_3), #olive) + rc(B_0 B_1 B_2, #teal)$
 === Part 4: Master of tones
